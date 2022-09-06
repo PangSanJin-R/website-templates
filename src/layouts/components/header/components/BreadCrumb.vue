@@ -7,8 +7,8 @@
   </n-breadcrumb>
 </template>
 <script setup lang="ts">
-import { useRoute, useRouter, RouteLocationMatched } from "vue-router";
-import { ref, Ref, watch } from "vue";
+import { RouteLocationMatched } from "vue-router";
+import { Ref } from "vue";
 import { renderIcon, renderCustomIcon } from "@/util/common/index";
 import type { Meta } from "@/types/router";
 const router = useRouter();

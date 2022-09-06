@@ -8,7 +8,7 @@
     :collapsed-width="64"
     :options="menuOptions"
     :value="
-      (currentRoute.meta && currentRoute.meta.activeMenu) || currentRoute.name
+      (currentRoute.meta && currentRoute.meta.activeMenu as any) || currentRoute.name as any
     "
     @update:value="handleMenuSelect"
   />
@@ -18,10 +18,8 @@
 import { renderIcon, renderCustomIcon } from "@/util/common/index";
 import type { Meta, RouteType } from "@/types/router";
 import { usePermissionStore } from "@/store/permission/index";
-import { useRouter } from "vue-router";
 import { useAppStore } from "@/store/app";
 import { MenuOption } from "naive-ui";
-import { watch } from "vue";
 import { tagStore } from "@/store/tag/tag";
 const tag = tagStore();
 const router = useRouter();

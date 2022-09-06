@@ -7,11 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BreadCrumb: typeof import('./src/layouts/components/header/components/BreadCrumb.vue')['default']
-    Home: typeof import('./src/components/Home.vue')['default']
+    BreadCrumb: typeof import('./../layouts/components/header/components/BreadCrumb.vue')['default']
+    Home: typeof import('./../components/Home.vue')['default']
     'IconMdi:formatIndentDecrease': typeof import('~icons/mdi/format-indent-decrease')['default']
     'IconMdi:formatIndentIncrease': typeof import('~icons/mdi/format-indent-increase')['default']
-    MenuCollapse: typeof import('./src/layouts/components/header/components/MenuCollapse.vue')['default']
+    MenuCollapse: typeof import('./../layouts/components/header/components/MenuCollapse.vue')['default']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
     NIcon: typeof import('naive-ui')['NIcon']
@@ -22,8 +22,8 @@ declare module '@vue/runtime-core' {
     NTag: typeof import('naive-ui')['NTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SideLogo: typeof import('./src/layouts/components/sidebar/components/SideLogo.vue')['default']
-    SideMenu: typeof import('./src/layouts/components/sidebar/components/SideMenu.vue')['default']
-    Tag: typeof import('./src/layouts/components/tag/components/tag.vue')['default']
+    SideLogo: typeof import('./../layouts/components/sidebar/components/SideLogo.vue')['default']
+    SideMenu: typeof import('./../layouts/components/sidebar/components/SideMenu.vue')['default']
+    Tag: typeof import('./../layouts/components/tag/components/tag.vue')['default']
   }
 }
