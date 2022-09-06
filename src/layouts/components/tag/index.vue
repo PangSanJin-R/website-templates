@@ -7,7 +7,7 @@
       mx-2
       v-for="item in tag.tabs"
       :closable="tag.tabs.length > 1"
-      @close="handleClose(item.name)"
+      @close.stop="handleClose(item.name)"
       @click="handleTagClick(item.path)"
     >
       <component class="va-20" :is="getIcon(item.icon)" />
@@ -21,12 +21,26 @@ import { renderIcon } from "@/util/common/index";
 
 const tag = tagStore();
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 点击标签关闭按钮触发
+ * @params
+ * @DateTime 2022-09-5 16:40:23
+ */
 function handleClose(name: string) {
   tag.removeTab(name);
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 点击标签跳转路由
+ * @params
+ * @DateTime 2022-09-6 10:40:23
+ */
 function handleTagClick(path: string) {
-  tag.tabJump(path);
+  tag.routerJump(path);
 }
 
 /**

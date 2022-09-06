@@ -20,9 +20,9 @@ const breadcrumbData: Ref<RouteLocationMatched[]> = ref([]);
 /**
  * @author 胖三斤
  * @ClassName:
- * @Description: 监听路由变化
+ * @Description: 监听路由变化更新面包屑导航
  * @params
- * @DateTime 2022-09-5 11:10:23
+ * @DateTime 2022-09-4 17:10:23
  */
 watch(
   () => router.currentRoute.value,
@@ -32,6 +32,13 @@ watch(
   { immediate: true }
 );
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 点击面包屑跳转路由
+ * @params
+ * @DateTime 2022-09-4 17:10:23
+ */
 function chickBreadcrumb(path: string) {
   router.push(path)
 }

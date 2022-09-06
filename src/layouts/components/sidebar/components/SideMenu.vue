@@ -23,19 +23,21 @@ import { useAppStore } from "@/store/app";
 import { MenuOption } from "naive-ui";
 import { watch } from "vue";
 import { tagStore } from "@/store/tag/tag";
-const tag = tagStore()
+const tag = tagStore();
 const router = useRouter();
 const appStore = useAppStore();
 const permissionStore = usePermissionStore();
 
 const { currentRoute } = router;
 
+/** 菜单对象 */
 const menuOptions: any = computed(() => {
   return permissionStore.menus
     .map((item) => getMenuItem(item))
     .sort((a, b) => a.order - b.order);
 });
 
+/** 菜单对象类型 */
 interface MennuItem {
   label: string;
   key: string;
@@ -45,6 +47,13 @@ interface MennuItem {
   children?: Array<MennuItem>;
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 根据Router来处理路由对象转换为菜单对象
+ * @params
+ * @DateTime 2022-09-4 15:50:45
+ */
 function getMenuItem(route: RouteType, basePath = ""): MennuItem {
   let menuItem: MennuItem = {
     label: (route.meta && route.meta.title) || route.name,
@@ -87,22 +96,42 @@ function getMenuItem(route: RouteType, basePath = ""): MennuItem {
       .map((item) => getMenuItem(item, menuItem.path))
       .sort((a, b) => a.order - b.order);
   }
-
   return menuItem;
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 图标解析
+ * @params
+ * @DateTime 2022-09-5 17:50:45
+ */
 function getIcon(meta?: Meta): (() => import("vue").VNodeChild) | null {
   if (meta?.customIcon) return renderCustomIcon(meta.customIcon, { size: 18 });
   if (meta?.icon) return renderIcon(meta.icon, { size: 18 });
   return null;
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 判断请求
+ * @params
+ * @DateTime 2022-09-5 18:10:34
+ */
 function isUrl(path: string): boolean {
   const reg =
     /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
   return reg.test(path);
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 路由请求处理
+ * @params
+ * @DateTime 2022-09-5 18:20:34
+ */
 function resolvePath(basePath: string, path: string) {
   if (isUrl(path)) return path;
   return `/${[basePath, path]
@@ -111,6 +140,13 @@ function resolvePath(basePath: string, path: string) {
     .join("/")}`;
 }
 
+/**
+ * @author 胖三斤
+ * @ClassName:
+ * @Description: 点击菜单触发用于跳转页面
+ * @params
+ * @DateTime 2022-09-5 18:40:34
+ */
 function handleMenuSelect(key: string, item: MenuOption) {
   const menuItem = item as MennuItem & MenuOption;
   if (isUrl(menuItem.path)) {
@@ -125,32 +161,34 @@ function handleMenuSelect(key: string, item: MenuOption) {
   }
 }
 
+/** 标签对象类型 */
 interface TabItem {
   name: string;
   path: string;
   title?: string;
-  icon?: string
+  icon?: string;
 }
 
 /**
  * @author 胖三斤
  * @ClassName:
- * @Description: 监听路由变化
+ * @Description: 监听路由变化然后给标签集合set值
  * @params
- * @DateTime 2022-09-5 11:10:23
+ * @DateTime 2022-09-5 19:05:23
  */
 watch(
   () => router.currentRoute.value,
   (newPath) => {
     const tabData: TabItem = {
       name: "",
-      path: ""
+      path: "",
     };
-    tabData.name = newPath.name as string
-    tabData.path = newPath.path as string
-    tabData.title = newPath.meta.title as string
-    tabData.icon = newPath.meta.icon as string
-    tag.setTabs(tabData)
+    tabData.name = newPath.name as string;
+    tabData.path = newPath.path as string;
+    tabData.title = newPath.meta.title as string;
+    tabData.icon = newPath.meta.icon as string;
+    tag.setTabs(tabData);
+    document.title = newPath.meta.title + " - HPlan";
   },
   { immediate: true }
 );
