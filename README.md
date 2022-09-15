@@ -11,3 +11,4 @@
 - 📦 集成 `unplugin` 插件，自动导入，解放双手，开发效率直接起飞
 - 🤹 集成 `iconify` 图标，支持自定义 svg 图标, 优雅使用icon
 - 🍇 集成 `unocss`，antfu 开源的原子 css 解决方案，非常轻量
+- 🦁 集成 `axios` , 封装网络请求 api
