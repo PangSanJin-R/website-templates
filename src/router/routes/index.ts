@@ -1,10 +1,12 @@
 import type { RouteModule, RouteType, RoutesType } from '@/types/router'
+const layouts = import('@/layouts/index.vue')
 
 export const basicRoutes: RoutesType = [
   {
     name: 'Dashboard',
     path: '/',
     redirect: '/workbench',
+    component: () => layouts,
     meta: {
       order: 0,
     },
@@ -39,6 +41,7 @@ export const basicRoutes: RoutesType = [
   {
     name: 'ExternalLink',
     path: '/external-link',
+    component: () => layouts,
     meta: {
       title: '外部链接',
       icon: 'mdi:link-variant',
@@ -69,15 +72,38 @@ export const basicRoutes: RoutesType = [
     ],
   },
   {
-    name: "demo",
-    path: "/demo",
-    component: () => import("@/views/demo/index.vue"),
+    name: 'Demo',
+    path: '/demo',
+    component: () => layouts,
     meta: {
-      title: '测试页面',
-      icon: 'twemoji:beaming-face-with-smiling-eyes',
+      title: '结果页面',
+      icon: 'twemoji:clown-face',
       order: 1,
     },
-  }
+    redirect: '/demo/uss',
+    children: [
+      {
+        name: "uss",
+        path: "uss",
+        component: () => import("@/views/demo/index.vue"),
+        meta: {
+          title: '结果页面',
+          icon: 'fluent-emoji-flat:bullseye',
+          order: 1,
+        },
+      },
+      {
+        name: "tss",
+        path: "tss",
+        component: () => import("@/views/demo/index.vue"),
+        meta: {
+          title: '测试页面',
+          icon: 'fluent-emoji-flat:bullseye',
+          order: 1,
+        },
+      }
+    ],
+  },
 ]
 
 export const NOT_FOUND_ROUTE: RouteType = {

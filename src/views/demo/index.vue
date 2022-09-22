@@ -1,11 +1,9 @@
 <template>
-  <n-space>
-    <n-tag> 爱在西元前 </n-tag>
-    <n-tag type="success"> 不该 </n-tag>
-    <n-tag type="warning"> 超人不会飞 </n-tag>
-    <n-tag type="error"> 手写的从前 </n-tag>
-    <n-tag type="info"> 哪里都是你 </n-tag>
-  </n-space>
+  <n-result status="404" title="404 资源不存在" description="生活总归带点荒谬">
+    <template #footer>
+      <n-button>找点乐子吧</n-button>
+    </template>
+  </n-result>
 </template>
 <script setup lang="ts"></script>
 <style lang="scss" scoped></style>
